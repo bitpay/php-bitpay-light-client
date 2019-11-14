@@ -81,7 +81,7 @@ $bitpay = BitPaySDKLight\Client::create()->withFile([FULL_PATH_TO_THE_CONFIG_FIL
 ```
 
 ```php
-$bitpay = new BitPaySDKLight\Client(BitPaySDKLight\Env.Test,"CFJCZH3VitcEER9Uybx8LMvkPsSWzpSWvN4vhNEJp47b");
+$bitpay = new BitPaySDKLight\Client("CFJCZH3VitcEER9Uybx8LMvkPsSWzpSWvN4vhNEJp47b", BitPaySDKLight\Env::Test);
 ```
 ##
 ### Create an invoice
