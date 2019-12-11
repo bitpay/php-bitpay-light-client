@@ -86,12 +86,12 @@ class MinerFees
     public function toArray()
     {
         $elements = [
-            'btc' => $this->getBTH()->toArray(),
-            'bch' => $this->getBCH()->toArray(),
-            'eth' => $this->getETH()->toArray(),
+            'btc'  => $this->getBTH()->toArray(),
+            'bch'  => $this->getBCH()->toArray(),
+            'eth'  => $this->getETH()->toArray(),
             'usdc' => $this->getUSDC()->toArray(),
             'gusd' => $this->getGUSD()->toArray(),
-            'pax' => $this->getPAX()->toArray(),
+            'pax'  => $this->getPAX()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -80,12 +80,12 @@ class PaymentTotal
     public function toArray()
     {
         $elements = [
-            'BTC' => $this->getBTC(),
-            'BCH' => $this->getBCH(),
-            'ETH' => $this->getETH(),
+            'BTC'  => $this->getBTC(),
+            'BCH'  => $this->getBCH(),
+            'ETH'  => $this->getETH(),
             'USDC' => $this->getUSDC(),
             'GUSD' => $this->getGUSD(),
-            'PAX' => $this->getPAX(),
+            'PAX'  => $this->getPAX(),
         ];
 
         foreach ($elements as $key => $value) {

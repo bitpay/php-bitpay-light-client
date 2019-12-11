@@ -86,12 +86,12 @@ class PaymentCodes
     public function toArray()
     {
         $elements = [
-            'BTC' => $this->getBTC()->toArray(),
-            'BCH' => $this->getBCH()->toArray(),
-            'ETH' => $this->getETH()->toArray(),
+            'BTC'  => $this->getBTC()->toArray(),
+            'BCH'  => $this->getBCH()->toArray(),
+            'ETH'  => $this->getETH()->toArray(),
             'USDC' => $this->getUSDC()->toArray(),
             'GUSD' => $this->getGUSD()->toArray(),
-            'PAX' => $this->getPAX()->toArray(),
+            'PAX'  => $this->getPAX()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

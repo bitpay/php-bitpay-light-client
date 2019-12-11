@@ -18,10 +18,10 @@ class PaymentCode
     public function toArray()
     {
         $elements = [
-            'bip72b' => $this->getBip72b(),
-            'bip73'  => $this->getBip73(),
+            'bip72b'  => $this->getBip72b(),
+            'bip73'   => $this->getBip73(),
             'eip681'  => $this->getEip681(),
-            'eip681b'  => $this->getEip681b(),
+            'eip681b' => $this->getEip681b(),
         ];
 
         foreach ($elements as $key => $value) {
