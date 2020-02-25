@@ -51,6 +51,13 @@ class Invoice
     protected $_shopper;
     protected $_billId;
     protected $_refundInfo;
+
+    /**
+     * PaymentCodes will be deprecated TODO on version 2.0
+     *
+     * @var array
+     * @deprecated
+     */
     protected $_paymentCodes;
     protected $_extendedNotifications = false;
 
@@ -78,7 +85,7 @@ class Invoice
         $this->_minerFees = new MinerFees();
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
-        $this->_paymentCodes = new PaymentCodes();
+        $this->_paymentCodes = null;
         $this->_paymentTotals = new PaymentTotal();
         $this->_paymentSubtotals = new PaymentTotal();
         $this->_paymentDisplayTotals = new PaymentTotal();
@@ -464,14 +471,25 @@ class Invoice
         $this->_refundInfo = $refundInfo;
     }
 
+    /**
+     * PaymentCodes will be deprecated TODO on version 2.0
+     *
+     * @deprecated
+     */
     public function getPaymentCodes()
     {
         return $this->_paymentCodes;
     }
 
+    /**
+     * PaymentCodes will be deprecated TODO on version 2.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function setPaymentCodes(PaymentCodes $paymentCodes)
     {
-        $this->_paymentCodes = $paymentCodes;
+        $this->_paymentCodes = null;
     }
 
     public function getExtendedNotifications()
@@ -593,7 +611,7 @@ class Invoice
             'shopper'                        => $this->getShopper()->toArray(),
             'billId'                         => $this->getBillId(),
             'refundInfo'                     => $this->getRefundInfo()->toArray(),
-            'paymentCodes'                   => $this->getPaymentCodes()->toArray(),
+            'paymentCodes'                   => [],
             'extendedNotifications'          => $this->getExtendedNotifications(),
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
