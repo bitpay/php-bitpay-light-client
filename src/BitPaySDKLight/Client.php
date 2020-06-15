@@ -23,9 +23,9 @@ use Exception;
  * Class Client
  * @package Bitpay light
  * @author  Antonio Buedo
- * @version 1.2.2002
+ * @version 1.3.2006
  * See bitpay.com/api for more information.
- * date 25.02.2020
+ * date 15.06.2020
  */
 class Client
 {

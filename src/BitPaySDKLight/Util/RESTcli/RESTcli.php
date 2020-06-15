@@ -36,8 +36,8 @@ class RESTcli
                     'base_url' => $this->_baseUrl,
                     'defaults' => [
                         'headers' => [
-                            "x-accept-version"           => Env::BitpayApiVersion,
-                            'X-BitPay-Plugin-Info'       => Env::BitpayPluginInfo,
+                            'x-accept-version'           => Env::BitpayApiVersion,
+                            'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
                             'x-bitpay-api-frame'         => Env::BitpayApiFrame,
                             'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                         ],
@@ -54,6 +54,10 @@ class RESTcli
             $fullURL = $this->_baseUrl.$uri;
             $headers = [
                 'Content-Type' => 'application/json',
+                'x-accept-version'           => Env::BitpayApiVersion,
+                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
+                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
             ];
 
             /**
@@ -80,6 +84,10 @@ class RESTcli
             $fullURL = $this->_baseUrl.$uri;
             $headers = [
                 'Content-Type' => 'application/json',
+                'x-accept-version'           => Env::BitpayApiVersion,
+                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
+                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
             ];
 
             if ($parameters) {
@@ -113,6 +121,10 @@ class RESTcli
             }
 
             $headers = [
+                'x-accept-version'           => Env::BitpayApiVersion,
+                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
+                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                 'Content-Type' => 'application/json',
             ];
 
@@ -139,6 +151,10 @@ class RESTcli
         try {
             $fullURL = $this->_baseUrl.$uri;
             $headers = [
+                'x-accept-version'           => Env::BitpayApiVersion,
+                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
+                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                 'Content-Type' => 'application/json',
             ];
 
