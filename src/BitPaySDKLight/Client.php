@@ -100,7 +100,7 @@ class Client
      */
     public function createInvoice(
         Invoice $invoice
-    ) {
+    ): Invoice {
         try {
             $invoice->setToken($this->_token);
             $invoice->setGuid($this->guid());
@@ -135,7 +135,7 @@ class Client
      */
     public function getInvoice(
         string $invoiceId
-    ) {
+    ): Invoice {
         try {
             $params = [];
             $params["token"] = $this->_token;
@@ -168,7 +168,7 @@ class Client
      * @return Bill A BitPay generated Bill object.
      * @throws BillCreationException
      */
-    public function createBill(Bill $bill)
+    public function createBill(Bill $bill): Bill
     {
         try {
             $bill->setToken($this->_token);
@@ -200,7 +200,7 @@ class Client
      * @return Bill A BitPay Bill object.
      * @throws BitPayException BitPayException class
      */
-    public function getBill(string $billId)
+    public function getBill(string $billId): Bill
     {
 
         try {
@@ -236,7 +236,7 @@ class Client
      * @return string A response status returned from the API.
      * @throws BitPayException BitPayException class
      */
-    public function deliverBill(string $billId, string $billToken)
+    public function deliverBill(string $billId, string $billToken): string
     {
         try {
             $responseJson = $this->_RESTcli->post(
@@ -260,7 +260,7 @@ class Client
      * @return Rates A Rates object populated with the BitPay exchange rate table.
      * @throws BitPayException BitPayException class
      */
-    public function getRates()
+    public function getRates(): Rates
     {
         try {
             $responseJson = $this->_RESTcli->get("rates", null);
@@ -290,7 +290,7 @@ class Client
      * @return array     A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getCurrencies()
+    public function getCurrencies(): array
     {
         try {
             $responseJson = $this->_RESTcli->get("currencies", null);
