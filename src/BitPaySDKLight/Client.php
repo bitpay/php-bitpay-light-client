@@ -23,9 +23,9 @@ use Exception;
  * Class Client
  * @package Bitpay light
  * @author  Antonio Buedo
- * @version 1.2.2002
+ * @version 1.3.2006
  * See bitpay.com/api for more information.
- * date 25.02.2020
+ * date 15.06.2020
  */
 class Client
 {
@@ -100,7 +100,7 @@ class Client
      */
     public function createInvoice(
         Invoice $invoice
-    ): Invoice {
+    ) {
         try {
             $invoice->setToken($this->_token);
             $invoice->setGuid($this->guid());
@@ -135,7 +135,7 @@ class Client
      */
     public function getInvoice(
         string $invoiceId
-    ): Invoice {
+    ) {
         try {
             $params = [];
             $params["token"] = $this->_token;
@@ -168,7 +168,7 @@ class Client
      * @return Bill A BitPay generated Bill object.
      * @throws BillCreationException
      */
-    public function createBill(Bill $bill): Bill
+    public function createBill(Bill $bill)
     {
         try {
             $bill->setToken($this->_token);
@@ -200,7 +200,7 @@ class Client
      * @return Bill A BitPay Bill object.
      * @throws BitPayException BitPayException class
      */
-    public function getBill(string $billId): Bill
+    public function getBill(string $billId)
     {
 
         try {
@@ -236,7 +236,7 @@ class Client
      * @return string A response status returned from the API.
      * @throws BitPayException BitPayException class
      */
-    public function deliverBill(string $billId, string $billToken): string
+    public function deliverBill(string $billId, string $billToken)
     {
         try {
             $responseJson = $this->_RESTcli->post(
@@ -260,7 +260,7 @@ class Client
      * @return Rates A Rates object populated with the BitPay exchange rate table.
      * @throws BitPayException BitPayException class
      */
-    public function getRates(): Rates
+    public function getRates()
     {
         try {
             $responseJson = $this->_RESTcli->get("rates", null);
@@ -290,7 +290,7 @@ class Client
      * @return array     A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getCurrencies(): array
+    public function getCurrencies()
     {
         try {
             $responseJson = $this->_RESTcli->get("currencies", null);
