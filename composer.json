@@ -13,8 +13,9 @@
     "homepage": "https://github.com/bitpay/php-bitpay-light-client",
     "require": {
         "php": "^7.1",
-        "guzzlehttp/guzzle": "^6.3",
-        "ext-json": "*"
+        "guzzlehttp/guzzle": "^6.3 || ^7.0",
+        "ext-json": "*",
+        "ext-openssl": "*"
     },
     "authors": [
         {
