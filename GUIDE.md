@@ -52,7 +52,7 @@ Add to your composer.json file by hand.
     ...
     "require": {
         ...
-        "bitpay/sdk-light": "~1.0"
+        "bitpay/sdk-light": "^2.0"
     }
     ...
 }
@@ -67,7 +67,7 @@ php composer.phar update bitpay/sdk-light
 ### Install using composer
 
 ```bash
-php composer.phar require bitpay/sdk:~3.0
+php composer.phar require bitpay/sdk:^2.0
 ```
 
 ### Initializing your BitPay light client
