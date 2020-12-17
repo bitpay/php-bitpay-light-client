@@ -67,7 +67,7 @@ php composer.phar update bitpay/sdk-light
 ### Install using composer
 
 ```bash
-php composer.phar require bitpay/sdk:^2.0
+php composer.phar require bitpay/sdk-light:^2.0
 ```
 
 ### Initializing your BitPay light client
