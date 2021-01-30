@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDKLight\Tests;
+namespace BitPaySDKLight\Test;
 
 
 use BitPaySDKLight;
@@ -319,7 +319,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue($rate != 0);
+        $this->assertNotEquals(0, $rate);
     }
 
     public function testShouldGetCNYExchangeRate()
@@ -333,7 +333,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue($rate != 0);
+        $this->assertNotEquals(0, $rate);
     }
 
     public function testShouldUpdateExchangeRates()
