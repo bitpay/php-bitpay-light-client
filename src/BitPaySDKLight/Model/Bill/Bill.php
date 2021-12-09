@@ -31,7 +31,7 @@ class Bill
     protected $_passProcessingFee;
     protected $_status;
     protected $_url;
-    protected $_createDate;
+    protected $_createdDate;
     protected $_id;
     protected $_merchant;
 
@@ -275,14 +275,14 @@ class Bill
         $this->_url = $url;
     }
 
-    public function getCreateDate()
+    public function getCreatedDate()
     {
-        return $this->_createDate;
+        return $this->_createdDate;
     }
 
-    public function setCreateDate(string $createDate)
+    public function setCreatedDate(string $createdDate)
     {
-        $this->_createDate = $createDate;
+        $this->_createdDate = $createdDate;
     }
 
     public function getId()
@@ -326,7 +326,7 @@ class Bill
             'passProcessingFee' => $this->getPassProcessingFee(),
             'status'            => $this->getStatus(),
             'url'               => $this->getUrl(),
-            'createDate'        => $this->getCreateDate(),
+            'createdDate'        => $this->getCreatedDate(),
             'id'                => $this->getId(),
             'merchant'          => $this->getMerchant(),
         ];

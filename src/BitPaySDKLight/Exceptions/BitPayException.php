@@ -9,19 +9,29 @@ class BitPayException extends Exception
 {
     private $bitPayMessage = "Unexpected Bitpay exception.";
     private $bitPayCode    = "BITPAY-GENERIC";
+    protected $apiCode;
 
     /**
      * Construct the BitPayException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
+     * @param string $apiCode [optional] The API Exception code to throw.
      */
     public function __construct($message = "", $code = 100)
     {
         if (!$message) {
             $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
         }
-
+        $this->apiCode = $apiCode;
         parent::__construct($message, $code);
+    }
+
+    /**
+     * @return string Error code provided by the BitPay REST API
+     */
+    public function getApiCode()
+    {
+        return $this->apiCode;
     }
 }

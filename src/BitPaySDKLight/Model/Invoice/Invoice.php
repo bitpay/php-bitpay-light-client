@@ -24,11 +24,26 @@ class Invoice
     protected $_fullNotifications = false;
     protected $_notificationEmail = "";
     protected $_redirectURL       = "";
+    protected $_closeURL       = "";
+    protected $_autoRedirect  = false;
+    protected $_jsonPayProRequired;
+    protected $_buyerSms;
+    protected $_buyerEmail;
+    protected $_smsCode;
+    protected $_merchantName;
+    protected $_forcedBuyerSelectedWallet;
+    protected $_selectedTransactionCurrency;
     protected $_orderId           = "";
     protected $_itemDesc          = "";
     protected $_itemCode          = "";
     protected $_physical          = false;
+    protected $_description;
     protected $_paymentCurrencies;
+    protected $_paymentSubtotals;
+    protected $_paymentTotals;
+    protected $_paymentDisplayTotals;
+    protected $_paymentDisplaySubTotals;
+    protected $_paymentCodes;
     protected $_acceptanceWindow;
     protected $_buyer;
     protected $_refundAddresses;
@@ -46,16 +61,27 @@ class Invoice
     protected $_refundAddressRequestPending;
     protected $_buyerProvidedEmail;
     protected $_buyerProvidedInfo;
+    protected $_paymentString;
+    protected $_verificationLink;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
+    protected $_nonPayProPaymentReceived;
     protected $_shopper;
     protected $_billId;
     protected $_refundInfo;
     protected $_extendedNotifications = false;
+    protected $_isCancelled;
+    protected $_fiatAmount;
 
     protected $_transactionCurrency;
+    protected $_amount;
+    protected $_isFee;
+    protected $_underpaidAmount;
+    protected $_overpaidAmount;
     protected $_amountPaid;
+    protected $_displayAmountPaid;
     protected $_exchangeRates;
+    protected $_bitpayIdRequired;
 
     /**
      * Constructor, create a minimal request Invoice object.
@@ -188,6 +214,76 @@ class Invoice
         $this->_redirectURL = $redirectURL;
     }
 
+    public function getCloseURL()
+    {
+        return $this->_closeURL;
+    }
+
+    public function setCloseURL(string $closeURL)
+    {
+        $this->_closeURL = $closeURL;
+    }
+
+    public function getAutoRedirect()
+    {
+        return $this->_autoRedirect;
+    }
+
+    public function setAutoRedirect(bool $autoRedirect)
+    {
+        $this->_autoRedirect = $autoRedirect;
+    }
+
+    public function getJsonPayProRequired()
+    {
+        return $this->_jsonPayProRequired;
+    }
+
+    public function setJsonPayProRequired(bool $jsonPayProRequired)
+    {
+        $this->_jsonPayProRequired = $jsonPayProRequired;
+    }
+
+    public function getBitpayIdRequired()
+    {
+        return $this->_bitpayIdRequired;
+    }
+
+    public function setBitpayIdRequired(bool $bitpayIdRequired)
+    {
+        $this->_bitpayIdRequired = $bitpayIdRequired;
+    }
+
+    public function getMerchantName()
+    {
+        return $this->_merchantName;
+    }
+
+    public function setMerchantName(string $merchantName)
+    {
+        $this->_merchantName = $merchantName;
+    }
+
+    public function getForcedBuyerSelectedWallet()
+    {
+        return $this->_forcedBuyerSelectedWallet;
+    }
+
+    public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
+    {
+        $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
+    }
+
+    public function getSelectedTransactionCurrency()
+    {
+        return $this->_selectedTransactionCurrency;
+    }
+
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    {
+        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+    }
+
     public function getOrderId()
     {
         return $this->_orderId;
@@ -261,6 +357,36 @@ class Invoice
         $this->_buyer = $buyer;
     }
 
+    public function getBuyerSms()
+    {
+        return $this->_buyerSms;
+    }
+
+    public function setBuyerSms(string $buyerSms)
+    {
+        $this->_buyerSms = $buyerSms;
+    }
+
+    public function getBuyerEmail()
+    {
+        return $this->_buyerEmail;
+    }
+
+    public function setBuyerEmail(string $buyerEmail)
+    {
+        $this->_buyerEmail = $buyerEmail;
+    }
+
+    public function getSmsCode()
+    {
+        return $this->_smsCode;
+    }
+
+    public function setSmsCode(string $smsCode)
+    {
+        $this->_smsCode = $smsCode;
+    }
+
     // Response fields
     //
 
@@ -278,20 +404,140 @@ class Invoice
     {
         return $this->_id;
     }
-
+    
     public function setId($id)
     {
         $this->_id = $id;
     }
-
+    
     public function getUrl()
     {
         return $this->_url;
     }
-
+    
     public function setUrl($url)
     {
         $this->_url = $url;
+    }
+    
+    public function getPaymentSubTotals()
+    {
+        return $this->_paymentSubtotals;
+    }
+
+    public function setPaymentSubTotals($paymentSubtotals)
+    {
+        $this->_paymentSubtotals = $paymentSubtotals;
+    }
+
+    public function getPaymentTotals()
+    {
+        return $this->_paymentTotals;
+    }
+
+    public function setPaymentTotals($paymentTotals)
+    {
+        $this->_paymentTotals = $paymentTotals;
+    }
+
+    public function getPaymentDisplayTotals()
+    {
+        return $this->_paymentDisplayTotals;
+    }
+
+    public function setPaymentDisplayTotals($paymentDisplayTotals)
+    {
+        $this->_paymentDisplayTotals = $paymentDisplayTotals;
+    }
+
+    public function getPaymentDisplaySubTotals()
+    {
+        return $this->_paymentDisplaySubTotals;
+    }
+
+    public function setPaymentDisplaySubTotals($paymentDisplaySubTotals)
+    {
+        $this->_paymentDisplaySubTotals = $paymentDisplaySubTotals;
+    }
+
+    public function getPaymentCodes()
+    {
+        return $this->_paymentCodes;
+    }
+
+    public function setPaymentCodes($paymentCodes)
+    {
+        $this->_paymentCodes = $paymentCodes;
+    }
+
+    public function getPaymentString()
+    {
+        return $this->_paymentString;
+    }
+
+    public function setPaymentString(string $paymentString)
+    {
+        $this->_paymentString = $paymentString;
+    }
+
+    public function getVerificationLink()
+    {
+        return $this->_verificationLink;
+    }
+
+    public function setVerificationLink(string $verificationLink)
+    {
+        $this->_verificationLink = $verificationLink;
+    }
+
+    public function getAmount()
+    {
+        return $this->_amount;
+    }
+
+    public function setAmount($amount)
+    {
+        $this->_amount = $amount;
+    }
+
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->_description = $description;
+    }
+
+    public function getIsFee()
+    {
+        return $this->_isFee;
+    }
+
+    public function setIsFee(bool $isFee)
+    {
+        $this->_isFee = $isFee;
+    }
+
+    public function getUnderpaidAmount()
+    {
+        return $this->_underpaidAmount;
+    }
+
+    public function setUnderpaidAmount($underpaidAmount)
+    {
+        $this->_underpaidAmount = $underpaidAmount;
+    }
+
+    public function getOverpaidAmount()
+    {
+        return $this->_overpaidAmount;
+    }
+
+    public function setOverpaidAmount($overpaidAmount)
+    {
+        $this->_overpaidAmount = $overpaidAmount;
     }
 
     public function getStatus()
@@ -424,6 +670,16 @@ class Invoice
         $this->_minerFees = $minerFees;
     }
 
+    public function getNonPayProPaymentReceived()
+    {
+        return $this->_nonPayProPaymentReceived;
+    }
+
+    public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived)
+    {
+        $this->_nonPayProPaymentReceived = $nonPayProPaymentReceived;
+    }
+
     public function getShopper()
     {
         return $this->_shopper;
@@ -484,6 +740,16 @@ class Invoice
         $this->_amountPaid = $amountPaid;
     }
 
+    public function getDisplayAmountPaid()
+    {
+        return $this->_displayAmountPaid;
+    }
+
+    public function setDisplayAmountPaid(string $displayAmountPaid)
+    {
+        $this->_displayAmountPaid = $displayAmountPaid;
+    }
+
     public function getExchangeRates()
     {
         return $this->_exchangeRates;
@@ -492,6 +758,26 @@ class Invoice
     public function setExchangeRates($exchangeRates)
     {
         $this->_exchangeRates = $exchangeRates;
+    }
+
+    public function getIsCancelled()
+    {
+        return $this->_isCancelled;
+    }
+
+    public function setIsCancelled(bool $isCancelled)
+    {
+        $this->_isCancelled = $isCancelled;
+    }
+
+    public function getFiatAmount()
+    {
+        return $this->_fiatAmount;
+    }
+
+    public function setFiatAmount($fiatAmount)
+    {
+        $this->_fiatAmount = $fiatAmount;
     }
 
     public function toArray()
@@ -503,6 +789,7 @@ class Invoice
             'price'                          => $this->getPrice(),
             'posData'                        => $this->getPosData(),
             'notificationURL'                => $this->getNotificationURL(),
+            'closeURL'                       => $this->getCloseURL(),
             'transactionSpeed'               => $this->getTransactionSpeed(),
             'fullNotifications'              => $this->getFullNotifications(),
             'notificationEmail'              => $this->getNotificationEmail(),
@@ -515,6 +802,7 @@ class Invoice
             'acceptanceWindow'               => $this->getAcceptanceWindow(),
             'buyer'                          => $this->getBuyer()->toArray(),
             'refundAddresses'                => $this->getRefundAddresses(),
+            'autoRedirect'                   => $this->getAutoRedirect(),
             'id'                             => $this->getId(),
             'url'                            => $this->getUrl(),
             'status'                         => $this->getStatus(),
@@ -534,9 +822,32 @@ class Invoice
             'billId'                         => $this->getBillId(),
             'refundInfo'                     => $this->getRefundInfo()->toArray(),
             'extendedNotifications'          => $this->getExtendedNotifications(),
+            'nonPayProPaymentReceived'       => $this->getNonPayProPaymentReceived(),
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
+            'merchantName'                   => $this->getMerchantName(),
+            'bitpayIdRequired'               => $this->getBitpayIdRequired(),
+            'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
+            'buyerSms'                       => $this->getBuyerSms(),
+            'paymentString'                  => $this->getPaymentString(),
+            'verificationLink'               => $this->getVerificationLink(),
+            'amount'                         => $this->getAmount(),
+            'description'                    => $this->getDescription(),
+            'isFee'                          => $this->getIsFee(),
+            'isCancelled'                    => $this->getIsCancelled(),
+            'fiatAmount'                     => $this->getFiatAmount(),
+            'buyerEmail'                     => $this->getBuyerEmail(),
+            'smsCode'                        => $this->getSmsCode(),
+            'paymentTotals'                  => $this->getPaymentTotals(),
+            'paymentSubtotals'               => $this->getPaymentSubTotals(),
+            'paymentDisplayTotals'           => $this->getPaymentDisplayTotals(),
+            'paymentDisplaySubTotals'        => $this->getPaymentDisplaySubTotals(),
+            'displayAmountPaid'              => $this->getDisplayAmountPaid(),
+            'paymentCodes'                   => $this->getPaymentCodes(),
+            'paymentString'                  => $this->getPaymentString(),
+            'verificationLink'               => $this->getVerificationLink(),
+            'bitpayIdRequired'               => $this->getBitpayIdRequired()
         ];
 
         foreach ($elements as $key => $value) {
