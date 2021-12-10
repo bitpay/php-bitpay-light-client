@@ -21,7 +21,7 @@ class RateQueryException extends RateException
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
         $this->apiCode = $apiCode;
-        parent::__construct($message, $code);
+        parent::__construct($message, $code, $previous);
     }
 
     /**

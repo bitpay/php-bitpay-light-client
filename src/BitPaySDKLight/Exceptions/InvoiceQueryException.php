@@ -16,12 +16,11 @@ class InvoiceQueryException extends InvoiceException
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 103)
+    public function __construct($message = "", $code = 103, Exception $previous=NULL, $apiCode = "000000")
     {
-
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
         $this->apiCode = $apiCode;
-        parent::__construct($message, $code);
+        parent::__construct($message, $code, $previous);
     }
 
     /**

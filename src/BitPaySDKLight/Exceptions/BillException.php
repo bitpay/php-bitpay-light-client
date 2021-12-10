@@ -22,7 +22,7 @@ class BillException extends BitPayException
             $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
         }
 
-        parent::__construct($message, $code);
+        parent::__construct($message, $code, $previous);
     }
 
     /**
