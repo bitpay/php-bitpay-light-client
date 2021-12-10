@@ -326,7 +326,7 @@ class Bill
             'passProcessingFee' => $this->getPassProcessingFee(),
             'status'            => $this->getStatus(),
             'url'               => $this->getUrl(),
-            'createdDate'        => $this->getCreatedDate(),
+            'createdDate'       => $this->getCreatedDate(),
             'id'                => $this->getId(),
             'merchant'          => $this->getMerchant(),
         ];
