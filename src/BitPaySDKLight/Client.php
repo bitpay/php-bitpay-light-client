@@ -96,7 +96,8 @@ class Client
      * @param $invoice Invoice An Invoice object with request parameters defined.
      *
      * @return Invoice $invoice Invoice A BitPay generated Invoice object.
-     * @throws InvoiceCreationException
+     * @throws InvoiceCreationException InvoiceCreationException class
+     * @throws BitPayException BitPayException class
      */
     public function createInvoice(
         Invoice $invoice
@@ -106,6 +107,8 @@ class Client
             $invoice->setGuid($this->guid());
 
             $responseJson = $this->_RESTcli->post("invoices", $invoice->toArray());
+        } catch (BitPayException $e) {
+            throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage());
         }
@@ -131,6 +134,7 @@ class Client
      * @param $invoiceId string The id of the invoice to retrieve.
      *
      * @return Invoice A BitPay Invoice object.
+     * @throws InvoiceQueryException InvoiceQueryException class
      * @throws BitPayException BitPayException class
      */
     public function getInvoice(
@@ -141,6 +145,8 @@ class Client
             $params["token"] = $this->_token;
 
             $responseJson = $this->_RESTcli->get("invoices/".$invoiceId, $params);
+        } catch (BitPayException $e) {
+            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
         }
@@ -166,7 +172,8 @@ class Client
      * @param Bill $bill string A Bill object with request parameters defined.
      *
      * @return Bill A BitPay generated Bill object.
-     * @throws BillCreationException
+     * @throws BillCreationException BillCreationException class
+     * @throws BitPayException BitPayException class
      */
     public function createBill(Bill $bill): Bill
     {
@@ -174,6 +181,8 @@ class Client
             $bill->setToken($this->_token);
 
             $responseJson = $this->_RESTcli->post("bills", $bill->toArray());
+        } catch (BitPayException $e) {
+            throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -198,6 +207,7 @@ class Client
      *
      * @param $billId string The id of the bill to retrieve.
      * @return Bill A BitPay Bill object.
+     * @throws BillQueryException BillQueryException class
      * @throws BitPayException BitPayException class
      */
     public function getBill(string $billId): Bill
@@ -208,6 +218,8 @@ class Client
             $params["token"] = $this->_token;
 
             $responseJson = $this->_RESTcli->get("bills/".$billId, $params);
+        } catch (BitPayException $e) {
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -234,6 +246,7 @@ class Client
      * @param $billToken   string The token of the requested bill.
      *
      * @return string A response status returned from the API.
+     * @throws BillDeliveryException BillDeliveryException class
      * @throws BitPayException BitPayException class
      */
     public function deliverBill(string $billId, string $billToken): string
@@ -241,6 +254,8 @@ class Client
         try {
             $responseJson = $this->_RESTcli->post(
                 "bills/".$billId."/deliveries", ['token' => $billToken]);
+        } catch (BitPayException $e) {
+            throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -258,12 +273,15 @@ class Client
      * Retrieve the exchange rate table maintained by BitPay.  See https://bitpay.com/bitcoin-exchange-rates.
      *
      * @return Rates A Rates object populated with the BitPay exchange rate table.
+     * @throws RateQueryException RateQueryException class
      * @throws BitPayException BitPayException class
      */
     public function getRates(): Rates
     {
         try {
             $responseJson = $this->_RESTcli->get("rates", null);
+        } catch (BitPayException $e) {
+            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage());
         }
@@ -288,12 +306,15 @@ class Client
      * Fetch the supported currencies.
      *
      * @return array     A list of BitPay Invoice objects.
+     * @throws CurrencyQueryException CurrencyQueryException class
      * @throws BitPayException BitPayException class
      */
     public function getCurrencies(): array
     {
         try {
             $responseJson = $this->_RESTcli->get("currencies", null);
+        } catch (BitPayException $e) {
+            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage(), null, null, $e->getApiCode());
         } catch (Exception $e) {
             throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage());
         }

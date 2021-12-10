@@ -8,6 +8,7 @@ class BuyerProvidedInfo
 {
     protected $_name;
     protected $_phoneNumber;
+    protected $_selectedWallet;
     protected $_emailAddress;
     protected $_selectedTransactionCurrency;
 
@@ -33,6 +34,16 @@ class BuyerProvidedInfo
     public function setPhoneNumber($phoneNumber)
     {
         $this->_phoneNumber = $phoneNumber;
+    }
+
+    public function getSelectedWallet()
+    {
+        return $this->_selectedWallet;
+    }
+
+    public function setSelectedWallet($selectedWallet)
+    {
+        $this->_selectedWallet = $selectedWallet;
     }
 
     public function getEmailAddress()
