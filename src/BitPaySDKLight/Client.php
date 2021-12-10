@@ -324,7 +324,7 @@ class Client
             $rates = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
-                'BitPaySDK\Model\Rate\Rate'
+                'BitPaySDKLight\Model\Rate\Rate'
             );
 
         } catch (Exception $e) {
