@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "BitPaySDKLight\\": "src/BitPaySDKLight"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BitPaySDKLight\\Test\\": "tests/"
+            "BitPaySDKLight\\Test\\": "tests/BitPaySDKLight"
         }
     }
 }
