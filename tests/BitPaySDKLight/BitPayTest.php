@@ -148,6 +148,7 @@ class BitPayTest extends TestCase
         array_push($items, $item);
 
         $bill = new Bill("1001", Currency::USD, "", $items);
+        $bill->setEmail("sandbox@bitpay.com");
         $basicBill = null;
         try {
             $basicBill = $this->_client->createBill($bill);
@@ -189,6 +190,7 @@ class BitPayTest extends TestCase
         array_push($items, $item);
 
         $bill = new Bill("1002", Currency::EUR, "", $items);
+        $bill->setEmail("sandbox@bitpay.com");
         $basicBill = null;
         try {
             $basicBill = $this->_client->createBill($bill);
@@ -232,6 +234,7 @@ class BitPayTest extends TestCase
         array_push($items, $item);
 
         $bill = new Bill("1003", Currency::EUR, "", $items);
+        $bill->setEmail("sandbox@bitpay.com");
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -275,6 +278,7 @@ class BitPayTest extends TestCase
         array_push($items, $item);
 
         $bill = new Bill("1005", Currency::EUR, "", $items);
+        $bill->setEmail("sandbox@bitpay.com");
         $basicBill = null;
         $retrievedBill = null;
         $result = null;
@@ -356,7 +360,7 @@ class BitPayTest extends TestCase
     {
         $ratesList = null;
         try {
-            $rates = $this->client->getCurrencyRates(Currency::ETH);
+            $rates = $this->_client->getCurrencyRates(Currency::ETH);
             $ratesList = $rates->getRates();
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -370,7 +374,7 @@ class BitPayTest extends TestCase
     {
         $rate = null;
         try {
-            $rate = $this->client->getCurrencyPairRate(Currency::ETH, Currency::USD);
+            $rate = $this->_client->getCurrencyPairRate(Currency::ETH, Currency::USD);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
