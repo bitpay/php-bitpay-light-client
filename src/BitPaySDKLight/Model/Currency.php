@@ -23,6 +23,7 @@ class Currency
     const WBTC  = "WBTC";
     const DAI  = "DAI";
     const LTC  = "LTC";
+    const SHIB  = "SHIB";
 
     // FIAT
     const AED = "AED";
