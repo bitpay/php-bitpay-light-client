@@ -93,14 +93,6 @@ php composer.phar require bitpay/sdk-light:^2.0
 
 ### Initializing your BitPay light client
 
-Once you have the environment file (JSON or YML previously generated) you can initialize the client on two different ways:
-
-```php
-// Provide the full path to the env file which you have previously stored securely.
-
-$bitpay = BitPaySDKLight\Client::create()->withFile([FULL_PATH_TO_THE_CONFIG_FILE]);
-```
-
 ```php
 $bitpay = new BitPaySDKLight\Client("CFJCZH3VitcEER9Uybx8LMvkPsSWzpSWvN4vhNEJp47b", BitPaySDKLight\Env::Test);
 ```
