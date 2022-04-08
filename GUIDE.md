@@ -93,6 +93,8 @@ php composer.phar require bitpay/sdk-light:^2.0
 
 ### Initializing your BitPay light client
 
+Once you have your previously generated Token, you can initialize the client following this example:
+
 ```php
 $bitpay = new BitPaySDKLight\Client("CFJCZH3VitcEER9Uybx8LMvkPsSWzpSWvN4vhNEJp47b", BitPaySDKLight\Env::Test);
 ```
